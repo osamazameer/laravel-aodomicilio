@@ -1,5 +1,4 @@
 @extends('layouts.app')
-{{-- SHIFT: Recipt --}}
 @section('content')
 
 <div class="container">

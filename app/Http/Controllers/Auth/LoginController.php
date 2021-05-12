@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
 
     // GET Requests -> Shows the login form
-    public function index() 
+    public function index()
     {
         return view('auth.login');
     }
@@ -25,11 +25,10 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         $credentials = $request->only('email', 'password');
-        
 
 
-        if(!Auth::attempt($credentials))
-        {
+
+        if (!Auth::attempt($credentials)) {
             return back()->with('status', 'Invalid login details');
         }
         return redirect()->route('home');

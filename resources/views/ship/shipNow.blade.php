@@ -9,11 +9,11 @@
             <div class="tab" role="tabpanel">
                 <!-- Nav tabs heads -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="nav-item"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab" class="nav-link">Ship Now</a>
+                    <li role="presentation" class="nav-item"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab" class="nav-link">Track Now</a>
                     </li>
-                    <li role="presentation" class="nav-item"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab" class="nav-link">Shop/Buy</a>
+                    <li role="presentation" class="nav-item"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab" class="nav-link">Ship Now</a>
                     </li>
-                    <li role="presentation" class="nav-item"><a href="#Section3" aria-controls="messages" role="tab" data-toggle="tab" class="nav-link">Receive Packages</a>
+                    <li role="presentation" class="nav-item"><a href="#Section3" aria-controls="messages" role="tab" data-toggle="tab" class="nav-link">Shipping Status</a>
                     </li>
                 </ul>
                 <!-- Tab panels -->
@@ -29,7 +29,12 @@
                     @if(session('ref_no'))
                     <span class="text-success bold">Refrence No: {{session('ref_no')}} </span>
                     @endif
-                    <div role="tabpanel" class="tab-pane  active" id="Section1">
+
+                    <div role="tabpanel" class="tab-pane active" id="Section1">
+                        @include('ship.track')
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="Section2">
                         <form action="{{ route('ship-now') }}" method="post" class="form-tabs">
                             @csrf
                             <div class="form-group">
@@ -88,20 +93,7 @@
                     <input type="checkbox" class="form-check-input" name="is_active" id="is_active" checked>
                     <label class="form-check-label" for="is_active" >Make  Active</label>
                 </div> --}}
-                            <button type="submit" class="btn btn-success">Create</button>
-                        </form>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="Section2">
-                        <form class="form-tabs">
-                            <div class="form-group">
-                                <label>Order 2</label>
-                                <input type="text" class="form-control" placeholder="Enter Your Order Here">
-                            </div>
-                            <div class="form-group">
-                                <label>Order Address 2</label>
-                                <input type="text" class="form-control" placeholder="Address">
-                            </div>
-                            <button class="btn btn-danger button-submit">SUBMIT</button>
+                            <button type="submit" class="btn btn-danger button-submit">SUBMIT</button>
                         </form>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="Section3">
@@ -122,194 +114,7 @@
         </div>
     </div>
 </div>
-<div class="container my-5">
 
-
-
-
-
-    <!-- <form action="{{ route('ship-now') }}" method="post">
-                @csrf
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Full Name</label>
-                    <input value="{{ old('name') }}" type="text" name="name" class="form-control @error('name') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable name for category">
-                    @error('name')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input value="{{ old('email') }}" type="email" name="email" class="form-control @error('email') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable email for category">
-                    @error('email')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Contact No.</label>
-                    <input value="{{ old('phone_no') }}" type="text" name="phone_no" class="form-control @error('phone_no') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable phone_no for category">
-                    @error('phone_no')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">To</label>
-                    <input value="{{ old('to_location') }}" type="text" name="to_location" class="form-control @error('to_location') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. Libson, Porto">
-                    <small class="form-text text-muted">Where you would like to ship</small>
-                    @error('to_location')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">From</label>
-                    <input value="{{ old('from_location') }}" type="text" name="from_location" class="form-control @error('from_location') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. Libson, Porto">
-                    <small class="form-text text-muted">Where are you shipping from</small>
-                    
-                    @error('from_location')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Payment Method</label>
-                    <input value="{{ old('payment_method') }}" type="text" name="payment_method" class="form-control @error('payment_method') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable payment_method for category">
-                    @error('payment_method')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="instructions">Instructions</label>
-                    <textarea id="instructions" value="{{ old('instructions') }}" name="instructions" class="form-control @error('instructions') border border-danger @enderror" rows="3" placeholder="What is the Category about?"></textarea>
-                    @error('instructions')
-                        <small id="" class="form-text text-danger ">{{$message}}</small>
-                    @enderror
-                </div>
-                {{-- <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="is_active" id="is_active" checked>
-                    <label class="form-check-label" for="is_active" >Make  Active</label>
-                </div> --}}
-                <button type="submit" class="btn btn-success">Create</button>
-            </form>                         -->
-
-
-    <!-- <div class="row">
-        <div class="col-md-6 m-auto"><br>
-            <div class="card card-nav-tabs">
-                <div class="card-header card-header-primary">
-                    <div class="nav-tabs-navigation">
-                        <div class="nav-tabs-wrapper">
-                            <ul class="nav nav-tabs" data-tabs="tabs">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#profile" data-toggle="tab">
-                                        Ship Now
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#messages" data-toggle="tab">
-                                        Shop Now
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#settings" data-toggle="tab">
-                                        Messages
-                                    </a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body ">
-
-                    @if(session('error'))
-                    <span class="text-danger"> {{session('error')}} </span>
-                    @endif
-
-                    @if(session('status'))
-                    <span class="text-success"> {{session('status')}} </span>
-                    @endif
-
-                    @if(session('ref_no'))
-                    <span class="text-success bold">Refrence No: {{session('ref_no')}} </span>
-                    @endif
-                    </p>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="profile">
-                            <form action="{{ route('ship-now') }}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Full Name</label>
-                                    <input value="{{ old('name') }}" type="text" name="name" class="form-control @error('name') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable name for category">
-                                    @error('name')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input value="{{ old('email') }}" type="email" name="email" class="form-control @error('email') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable email for category">
-                                    @error('email')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Contact No.</label>
-                                    <input value="{{ old('phone_no') }}" type="text" name="phone_no" class="form-control @error('phone_no') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable phone_no for category">
-                                    @error('phone_no')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">To</label>
-                                    <input value="{{ old('to_location') }}" type="text" name="to_location" class="form-control @error('to_location') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. Libson, Porto">
-                                    <small class="form-text text-muted">Where you would like to ship</small>
-                                    @error('to_location')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">From</label>
-                                    <input value="{{ old('from_location') }}" type="text" name="from_location" class="form-control @error('from_location') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. Libson, Porto">
-                                    <small class="form-text text-muted">Where are you shipping from</small>
-
-                                    @error('from_location')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Payment Method</label>
-                                    <input value="{{ old('payment_method') }}" type="text" name="payment_method" class="form-control @error('payment_method') border border-danger @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a suitable payment_method for category">
-                                    @error('payment_method')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="instructions">Instructions</label>
-                                    <textarea id="instructions" value="{{ old('instructions') }}" name="instructions" class="form-control @error('instructions') border border-danger @enderror" rows="3" placeholder="What is the Category about?"></textarea>
-                                    @error('instructions')
-                                    <small id="" class="form-text text-danger ">{{$message}}</small>
-                                    @enderror
-                                </div>
-                                {{-- <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="is_active" id="is_active" checked>
-                    <label class="form-check-label" for="is_active" >Make  Active</label>
-                </div> --}}
-                                <button type="submit" class="btn btn-success">Create</button>
-                            </form>
-                        </div>
-                        <div class="tab-pane" id="messages">
-                            <p>Tab 2</p>
-                        </div>
-                        <div class="tab-pane" id="settings">
-                            <p>Tab 3</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div> -->
-
-
-</div>
 </div>
 
 <style>

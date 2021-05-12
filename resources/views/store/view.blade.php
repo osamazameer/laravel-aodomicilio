@@ -65,7 +65,7 @@
                         </div>
                     </h5>
                     <div class="action text-center  ">
-                        <button class="add-to-cart btn btn-default" style="width:40%;" type="button">add to cart</button>
+                        <a href="{{route('cart')}}"><button class="add-to-cart btn btn-default" style="width:40%;" type="button">add to cart</button></a>
                         <a href="{{route('store')}}"><button style="width:40%;" class="like btn btn-default" type="button">Back</button></a>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background:#9e0000 !important;color:white !important;">
-  <a class="navbar-brand" href="#">Aodomicilio</a>
+  <a class="navbar-brand" href="/">Aodomicilio</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,29 +9,28 @@
 
     {{-- Left Side --}}
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
+
+      <div class="nav-item active dropdown">
+        <a href="" class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <h6 class="dropdown-header">Food</h6>
+          <button class="dropdown-item" type="button">Fast Food</button>
+          <button class="dropdown-item" type="button">Junk Food</button>
+          <button class="dropdown-item" type="button">Dairy Food</button>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Vegetables</h6>
+          <button class="dropdown-item" type="button">Add More</button>
+
+        </div>
+      </div>
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('store') }}">Store <span class="sr-only">(current)</span></a>
       </li>
-      <!-- <li class="nav-item active">
-        <a class="nav-link" href="{{ route('ship-now') }}">Ship Now<span class="sr-only">(current)</span></a>
-      </li> -->
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ route('track') }}">Track<span class="sr-only">(current)</span></a>
-      </li>
 
 
-      {{-- TODO: Remove this from main nav --}}
-      <li class="nav-item dropdown">
-        @auth
-        <a class="nav-link" href="{{ route('product') }}">
-          Admin
-        </a>
-        @endauth
 
-      </li>
     </ul>
 
     {{-- Right Side --}}
@@ -40,11 +39,14 @@
       <li class="nav-item">
         <a class="nav-link" href=" {{ route('register') }} ">{{auth()->user()->name}}</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="{{ route('product') }}">
+          Admin
+        </a>
+      </li>
+
       <li class="nav-item">
-        <form action=" {{ route('logout') }} " method="post">
-          @csrf
-          <button class="nav-link" type="submit">Logout</button>
-        </form>
+        <a href="{{ route('logout') }} " class="nav-link" type="submit">Logout</a>
       </li>
       @endauth
 
@@ -56,6 +58,7 @@
         <a class="nav-link" href=" {{ route('login') }} ">Login</a>
       </li>
       @endguest
+
     </ul>
     {{-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -22,4 +22,11 @@ class StoreController extends Controller
             'product' => $product
         ]);
     }
+    public function cartview()
+    {
+        $product = Product::get();
+        return view('store.cart', [
+            'product' => $product
+        ]);
+    }
 }
